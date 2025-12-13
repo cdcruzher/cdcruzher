@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos David | Science, Music & Code</title>
+    <meta name="description" content="Creative Developer and Artist exploring the intersection of music, genetics, and technology.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Outfit', 'sans-serif'], mono: ['Space Grotesk', 'monospace'] },
+                    colors: {
+                        'brand-dark': '#0f172a', 'brand-purple': '#7c3aed', 'brand-blue': '#2563eb',
+                        'brand-accent': '#06b6d4', 'glass-white': 'rgba(255, 255, 255, 0.05)',
+                    },
+                    animation: { 'float': 'float 6s ease-in-out infinite' },
+                    keyframes: { float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-20px)' } } }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .gradient-text { background: linear-gradient(135deg, #60a5fa, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-bg { background-image: radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.15) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.15) 0%, transparent 40%); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        
+        /* Google Translate Styling */
+        .goog-te-banner-frame { display: none !important; }
+        body { top: 0 !important; }
+        .goog-te-gadget { color: transparent !important; font-size: 0 !important; }
+        .goog-te-gadget span { display: none !important; }
+        .goog-te-combo {
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #cbd5e1;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.875rem;
+            outline: none;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        .goog-te-combo:hover { background-color: rgba(255, 255, 255, 0.1); }
+        .goog-logo-link { display: none !important; }
+        #google_translate_element { display: flex; align-items: center; }
+    </style>
+</head>
+<body class="bg-brand-dark text-slate-300 font-sans selection:bg-brand-purple selection:text-white overflow-x-hidden">
+    <nav class="fixed w-full z-50 transition-all duration-300 glass-card border-b border-white/5" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="font-mono text-xl font-bold tracking-tighter text-white">CD<span class="text-brand-purple">.</span>CRUZHER</span>
+                </div>
+                <div class="hidden md:flex items-center">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#portfolio" class="hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium">Apps</a>
+                        <a href="#music" class="hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium">Music</a>
+                        <a href="#blog" class="hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                        <a href="#gallery" class="hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium">Gallery</a>
+                    </div>
+                    <!-- Language Selector -->
+                    <div id="google_translate_element" class="ml-4"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-16 hero-bg overflow-hidden">
+        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-brand-purple/20 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center">
+            <div class="w-full lg:w-1/2 text-center lg:text-left mt-12 lg:mt-0 z-10">
+                <div class="inline-block px-3 py-1 mb-4 text-xs font-mono text-brand-accent border border-brand-accent/30 rounded-full bg-brand-accent/5">Creative Developer & Artist</div>
+                <h1 class="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">Exploring <br><span class="gradient-text">Science, Music</span> <br>& Code.</h1>
+                <p class="text-xl text-slate-400 mb-8 max-w-lg mx-auto lg:mx-0">Building interactive tools that bridge the gap between biological data, musical theory, and modern web tech.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="#portfolio" class="px-8 py-3 bg-white text-brand-dark font-bold rounded-full hover:bg-gray-200 transition-colors">View Experiments</a>
+                </div>
+            </div>
+            <div class="w-full lg:w-1/2 flex justify-center z-10">
+                <div class="relative w-72 h-72 lg:w-96 lg:h-96">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-brand-purple to-brand-accent rounded-full opacity-20 animate-float blur-xl"></div>
+                    <div class="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 glass-card p-2 transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                        <div class="w-full h-full bg-slate-800 rounded-xl overflow-hidden relative flex items-center justify-center">
+                            <span class="text-6xl text-white/10 font-bold">CD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-20 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div><h2 class="text-3xl md:text-4xl font-bold text-white mb-2">Interactive Experiments</h2><p class="text-slate-400">Web-based tools built with modern technologies.</p></div>
+            </div>
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- EXISTING PROJECTS (Sample) -->
+                <div class="group glass-card rounded-xl overflow-hidden hover:border-brand-purple/50 transition-all duration-300 hover:-translate-y-1">
+                    <div class="h-48 bg-gradient-to-br from-indigo-900 to-slate-800 flex items-center justify-center relative overflow-hidden"><i class="fas fa-hourglass-half text-5xl text-white/20 group-hover:text-white/40 transition-all"></i></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-purple transition-colors">Music Time Capsule</h3>
+                        <p class="text-slate-400 text-sm mb-4">Explore daily musical history. Discover album releases, births, and major events for any day.</p>
+                        <a href="https://cdcruzher.github.io/efemerides-music/" target="_blank" class="text-brand-purple font-medium text-sm hover:underline">Launch App &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="music" class="py-20 bg-brand-dark relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                     <div class="aspect-video bg-black flex items-center justify-center relative rounded-xl border border-white/10"><i class="fas fa-play text-4xl text-white/50"></i></div>
+                </div>
+                <div class="order-1 lg:order-2 text-left">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mt-2 mb-6">Música en mis oídos</h2>
+                    <div id="latest-thought" class="glass-card p-6 rounded-xl border-l-4 border-brand-purple mt-8">
+                        <div class="flex items-center gap-3 mb-2"><span class="text-xs text-slate-400">Carlos David • Thought</span></div>
+                        <p class="italic text-slate-300">"Programming is the closest thing we have to magic."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW GALLERY SECTION -->
+    <section id="gallery" class="py-20 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+             <div class="flex justify-between items-end mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Visual Journal</h2>
+                <a href="https://instagram.com" target="_blank" class="text-slate-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fab fa-instagram"></i> Follow on Instagram</a>
+            </div>
+            <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                 <!-- Gallery items will appear here -->
+                 <a href="#" class="block relative aspect-square rounded-xl overflow-hidden group border border-white/5">
+                    <div class="w-full h-full bg-slate-800 flex items-center justify-center text-slate-600"><i class="fas fa-image text-3xl"></i></div>
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i class="fab fa-instagram text-3xl text-white"></i>
+                    </div>
+                 </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog" class="py-20 bg-slate-900/30">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-8 border-b border-white/10 pb-4">DevLog & Thoughts</h2>
+            <div id="blog-posts" class="space-y-8">
+                <!-- Blog posts will appear here -->
+                <article class="glass-card p-6 rounded-xl border border-white/5 hover:bg-white/5 transition-colors">
+                    <div class="flex items-center gap-4 mb-3 text-xs text-slate-500">
+                        <span class="text-brand-accent">Update</span>
+                        <span>•</span>
+                        <span>Oct 12, 2024</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Welcome to the new site</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        I've decided to merge my scientific and musical portfolios into one single experience. This site acts as a living laboratory for my experiments.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMENTS SECTION (Giscus Placeholder) -->
+    <section id="guestbook" class="py-12 bg-[#0a0f1c]">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold text-white mb-6">Guestbook</h3>
+            <div class="glass-card p-8 rounded-xl min-h-[150px] flex flex-col items-center justify-center">
+                <p class="text-slate-400 mb-4">Comments are powered by GitHub Discussions.</p>
+                <div class="giscus"></div>
+                <!-- Add Giscus script here -->
+                <p class="text-xs text-slate-600 mt-2 font-mono">Connects to GitHub Discussions</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="contact" class="bg-[#050810] pt-20 pb-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500 text-sm">
+            <p>© 2025 Carlos David Cruz Hernandez.</p>
+        </div>
+    </footer>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            addEventListener('click', function (e) { e.preventDefault(); document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' }); });
+        });
+
+        // Google Translate Init
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,de,fr,it,ja,zh-CN',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
