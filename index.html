@@ -156,10 +156,7 @@
                 </div>
                 <div class="order-1 lg:order-2 text-left">
                     <h2 id="about-title" class="text-4xl md:text-5xl font-bold text-white mt-2 mb-6">About Me</h2>
-                    <!-- ID: about-text -->
-                    <div id="about-text" class="text-slate-400 text-lg mb-6 leading-relaxed">
-                        I am a passionate creator working at the intersection of technology and art. My goal is to build digital experiences that inspire and connect people.
-                    </div>
+                    <div id="about-text" class="text-slate-400 text-lg mb-6 leading-relaxed">I am a passionate creator working at the intersection of technology and art. My goal is to build digital experiences that inspire and connect people.</div>
                     <div id="latest-thought" class="glass-card p-6 rounded-xl border-l-4 border-brand-purple mt-8">
                         <div class="flex items-center gap-3 mb-2"><span class="text-xs text-slate-400">Thought of the day</span></div>
                         <p class="italic text-slate-300">"Creativity is intelligence having fun."</p>
@@ -207,6 +204,7 @@
     <div id="google_translate_element"></div>
 
     <script>
+        // Language Switcher Logic
         function changeLang(lang) {
             const combo = document.querySelector('.goog-te-combo');
             if (combo) {
@@ -215,11 +213,9 @@
                 const btnText = document.getElementById('lang-text');
                 if(btnText) btnText.innerText = lang.toUpperCase();
             } else {
-                console.warn('Google Translate widget not ready yet.');
+                alert('Language service not ready yet. Please try again in a moment or ensure you are connected to the internet.');
             }
-            // Close the dropdown regardless
-            const dropdown = document.getElementById('lang-dropdown');
-            if(dropdown) dropdown.classList.remove('show');
+            document.getElementById('lang-dropdown').classList.remove('show');
         }
 
         // Close dropdown when clicking outside
@@ -239,7 +235,7 @@
             addEventListener('click', function (e) { e.preventDefault(); document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' }); });
         });
         
-        // Attach init function to window so Google script can find it
+        // Initialize Google Translate
         window.googleTranslateElementInit = function() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
