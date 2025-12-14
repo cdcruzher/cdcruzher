@@ -156,7 +156,10 @@
                 </div>
                 <div class="order-1 lg:order-2 text-left">
                     <h2 id="about-title" class="text-4xl md:text-5xl font-bold text-white mt-2 mb-6">About Me</h2>
-                    <div id="about-text" class="text-slate-400 text-lg mb-6 leading-relaxed">I am a passionate creator working at the intersection of technology and art. My goal is to build digital experiences that inspire and connect people.</div>
+                    <!-- ID: about-text -->
+                    <div id="about-text" class="text-slate-400 text-lg mb-6 leading-relaxed">
+                        I am a passionate creator working at the intersection of technology and art. My goal is to build digital experiences that inspire and connect people.
+                    </div>
                     <div id="latest-thought" class="glass-card p-6 rounded-xl border-l-4 border-brand-purple mt-8">
                         <div class="flex items-center gap-3 mb-2"><span class="text-xs text-slate-400">Thought of the day</span></div>
                         <p class="italic text-slate-300">"Creativity is intelligence having fun."</p>
@@ -204,8 +207,10 @@
     <div id="google_translate_element"></div>
 
     <script>
-        // Language Switcher Logic
         function changeLang(lang) {
+            const dropdown = document.getElementById('lang-dropdown');
+            if(dropdown) dropdown.classList.remove('show');
+
             const combo = document.querySelector('.goog-te-combo');
             if (combo) {
                 combo.value = lang;
@@ -213,9 +218,20 @@
                 const btnText = document.getElementById('lang-text');
                 if(btnText) btnText.innerText = lang.toUpperCase();
             } else {
-                alert('Language service not ready yet. Please try again in a moment or ensure you are connected to the internet.');
+                // Retry mechanism
+                setTimeout(function() {
+                    const retryCombo = document.querySelector('.goog-te-combo');
+                    if (retryCombo) {
+                        retryCombo.value = lang;
+                        retryCombo.dispatchEvent(new Event('change'));
+                        const btnText = document.getElementById('lang-text');
+                        if(btnText) btnText.innerText = lang.toUpperCase();
+                    } else {
+                        // Only show alert if retry fails
+                        alert('Translation service is loading. Please check your internet connection or disable ad-blockers if it persists.');
+                    }
+                }, 1000);
             }
-            document.getElementById('lang-dropdown').classList.remove('show');
         }
 
         // Close dropdown when clicking outside
