@@ -1,7 +1,6 @@
 <html lang="en" class="scroll-smooth"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ID: page-title -->
     <title id="page-title">My Creative Portfolio</title>
     <meta name="description" content="Portfolio of a creative developer.">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -9,15 +8,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&amp;family=Space+Grotesk:wght@300;500;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
+    
+    <!-- Tailwind Config with ID for dynamic updates -->
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: { sans: ['Outfit', 'sans-serif'], mono: ['Space Grotesk', 'monospace'] },
                     colors: {
-                        'brand-dark': '#0f172a', 'brand-purple': '#7c3aed', 'brand-blue': '#2563eb',
-                        'brand-accent': '#06b6d4', 'glass-white': 'rgba(255, 255, 255, 0.05)',
+                        'brand-dark': '#0f172a', 
+                        'brand-purple': '#ed4040', 
+                        'brand-blue': '#2563eb',
+                        'brand-accent': '#d50707', 
+                        'glass-white': 'rgba(255, 255, 255, 0.05)',
                     },
                     animation: { 'float': 'float 6s ease-in-out infinite' },
                     keyframes: { float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-20px)' } } }
@@ -27,29 +31,23 @@
     </script>
     <style>
         .glass-card { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .gradient-text { background: linear-gradient(135deg, #60a5fa, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-text { background: linear-gradient(135deg, var(--tw-gradient-stops)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        /* Dynamic gradient fix for updated colors */
+        .gradient-main { --tw-gradient-from: #60a5fa; --tw-gradient-to: #c084fc; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+        
         .hero-bg { background-image: radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.15) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.15) 0%, transparent 40%); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
+        /* Hide Default Google Widget */
         .goog-te-banner-frame { display: none !important; }
         body { top: 0 !important; }
-        .goog-te-gadget { color: transparent !important; font-size: 0 !important; }
-        .goog-te-gadget span { display: none !important; }
-        .goog-te-combo {
-            background-color: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #cbd5e1;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.875rem;
-            outline: none;
-            cursor: pointer;
-            margin-left: 1rem;
-        }
-        .goog-te-combo:hover { background-color: rgba(255, 255, 255, 0.1); }
-        .goog-logo-link { display: none !important; }
-        #google_translate_element { display: flex; align-items: center; }
+        #google_translate_element { visibility: hidden; position: absolute; top: -9999px; }
+        
+        /* Custom Lang Menu */
+        .lang-menu { display: none; position: absolute; right: 0; top: 100%; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 0.5rem; padding: 0.5rem; min-width: 120px; z-index: 50; margin-top: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5); }
+        .lang-menu.show { display: block; }
+        .lang-btn { display: flex; align-items: center; gap: 0.5rem; width: 100%; padding: 0.5rem 1rem; color: #94a3b8; font-size: 0.875rem; transition: all 0.2s; border-radius: 0.25rem; }
+        .lang-btn:hover { background: rgba(255,255,255,0.1); color: white; }
     </style>
 </head>
 <body class="bg-brand-dark text-slate-300 font-sans selection:bg-brand-purple selection:text-white overflow-x-hidden">
@@ -57,8 +55,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <!-- ID: nav-logo -->
-                    <span id="nav-logo" class="font-mono text-xl font-bold tracking-tighter text-white">Carlos David</span>
+                    <span id="nav-logo" class="font-mono text-xl font-bold tracking-tighter text-white">CARLOS DAVID</span>
                 </div>
                 <div class="hidden md:flex items-center">
                     <div class="ml-10 flex items-baseline space-x-8">
@@ -68,7 +65,22 @@
                         <a href="#blog" class="hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium">Blog</a>
                         <a href="#gallery" class="hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium">Gallery</a>
                     </div>
-                    <div id="google_translate_element" class="ml-4"></div>
+                    
+                    <!-- Integrated Language Switcher -->
+                    <div class="ml-6 relative">
+                        <button onclick="document.getElementById('lang-dropdown').classList.toggle('show')" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors px-3 py-2 rounded-lg hover:bg-white/5">
+                            <i class="fas fa-globe"></i> <span class="text-sm font-mono">LANG</span> <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="lang-dropdown" class="lang-menu">
+                            <button onclick="changeLang('en')" class="lang-btn"><span class="w-4">🇺🇸</span> English</button>
+                            <button onclick="changeLang('es')" class="lang-btn"><span class="w-4">🇲🇽</span> Español</button>
+                            <button onclick="changeLang('de')" class="lang-btn"><span class="w-4">🇩🇪</span> Deutsch</button>
+                            <button onclick="changeLang('fr')" class="lang-btn"><span class="w-4">🇫🇷</span> Français</button>
+                            <button onclick="changeLang('it')" class="lang-btn"><span class="w-4">🇮🇹</span> Italiano</button>
+                            <button onclick="changeLang('ja')" class="lang-btn"><span class="w-4">🇯🇵</span> 日本語</button>
+                            <button onclick="changeLang('zh-CN')" class="lang-btn"><span class="w-4">🇨🇳</span> 中文</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,11 +89,8 @@
         <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-brand-purple/20 rounded-full blur-3xl animate-pulse-slow"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center">
             <div class="w-full lg:w-1/2 text-center lg:text-left mt-12 lg:mt-0 z-10">
-                <!-- ID: hero-badge -->
-                <div id="hero-badge" class="inline-block px-3 py-1 mb-4 text-xs font-mono text-brand-accent border border-brand-accent/30 rounded-full bg-brand-accent/5">My LIfe is Science and Music</div>
-                <!-- ID: hero-headline -->
-                <h1 id="hero-headline" class="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">Creating Digital Experiences.</h1>
-                <!-- ID: hero-desc -->
+                <div id="hero-badge" class="inline-block px-3 py-1 mb-4 text-xs font-mono text-brand-accent border border-brand-accent/30 rounded-full bg-brand-accent/5">Welcome to my world</div>
+                <h1 id="hero-headline" class="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">My Life is Science and Music</h1>
                 <p id="hero-desc" class="text-xl text-slate-400 mb-8 max-w-lg mx-auto lg:mx-0">I build interactive tools, design visual experiences, and explore the future of the web.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                     <a href="#portfolio" class="px-8 py-3 bg-white text-brand-dark font-bold rounded-full hover:bg-gray-200 transition-colors">View Projects</a>
@@ -106,7 +115,7 @@
                 <div><h2 class="text-3xl md:text-4xl font-bold text-white mb-2">My Projects</h2><p class="text-slate-400">A collection of my recent work.</p></div>
             </div>
             <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Sample Project (Generic) -->
+                <!-- Generic Project Card -->
                 <div class="group glass-card rounded-xl overflow-hidden hover:border-brand-purple/50 transition-all duration-300 hover:-translate-y-1">
                     <div class="h-48 bg-gradient-to-br from-indigo-900 to-slate-800 flex items-center justify-center relative overflow-hidden"><i class="fas fa-rocket text-5xl text-white/20 group-hover:text-white/40 transition-all"></i></div>
                     <div class="p-6">
@@ -126,9 +135,7 @@
                      <div class="aspect-video bg-black flex items-center justify-center relative rounded-xl border border-white/10"><i class="fas fa-user text-4xl text-white/50"></i></div>
                 </div>
                 <div class="order-1 lg:order-2 text-left">
-                    <!-- ID: about-title -->
                     <h2 id="about-title" class="text-4xl md:text-5xl font-bold text-white mt-2 mb-6">About Me</h2>
-                    <!-- ID: latest-thought -->
                     <div id="latest-thought" class="glass-card p-6 rounded-xl border-l-4 border-brand-purple mt-8">
                         <div class="flex items-center gap-3 mb-2"><span class="text-xs text-slate-400">Thought of the day</span></div>
                         <p class="italic text-slate-300">"Creativity is intelligence having fun."</p>
@@ -144,28 +151,14 @@
                 <h2 class="text-3xl md:text-4xl font-bold text-white">Visual Gallery</h2>
                 <a href="#" class="text-slate-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fab fa-instagram"></i> Social Media</a>
             </div>
-            <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4"><a href="#" target="_blank" class="block relative aspect-square rounded-xl overflow-hidden group border border-white/5">
-                        <img src="https://www.instagram.com/cdcruzher/" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Insta Post">
-                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <i class="fab fa-instagram text-3xl text-white"></i>
-                        </div>
-                    </a><a href="#" target="_blank" class="block relative aspect-square rounded-xl overflow-hidden group border border-white/5">
-                        <img src="https://youtu.be/pL78WCkQgk4?si=hof5w7Zj_WkvXjR_" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Insta Post">
-                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <i class="fab fa-instagram text-3xl text-white"></i>
-                        </div>
-                    </a>
-                 <!-- Gallery items will appear here -->
-            </div>
+            <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
         </div>
     </section>
 
     <section id="blog" class="py-20 bg-slate-900/30">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-8 border-b border-white/10 pb-4">Blog &amp; Updates</h2>
-            <div id="blog-posts" class="space-y-8">
-                <!-- Blog posts will appear here -->
-            </div>
+            <div id="blog-posts" class="space-y-8"></div>
         </div>
     </section>
 
@@ -182,14 +175,28 @@
     
     <footer id="contact" class="bg-[#050810] pt-20 pb-10 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500 text-sm">
-            <!-- ID: footer-copy -->
             <p id="footer-copy">© 2025 Your Name. All rights reserved.</p>
         </div>
     </footer>
+    
+    <!-- Google Translate Hidden Element -->
+    <div id="google_translate_element"></div>
+
     <script>
+        // Custom Language Logic
+        function changeLang(lang) {
+            const combo = document.querySelector('.goog-te-combo');
+            if (combo) {
+                combo.value = lang;
+                combo.dispatchEvent(new Event('change'));
+            }
+            document.getElementById('lang-dropdown').classList.remove('show');
+        }
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             addEventListener('click', function (e) { e.preventDefault(); document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' }); });
         });
+        
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
