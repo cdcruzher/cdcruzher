@@ -214,15 +214,33 @@
                 combo.dispatchEvent(new Event('change'));
                 const btnText = document.getElementById('lang-text');
                 if(btnText) btnText.innerText = lang.toUpperCase();
+            } else {
+                console.warn('Google Translate widget not ready yet.');
             }
-            document.getElementById('lang-dropdown').classList.remove('show');
+            // Close the dropdown regardless
+            const dropdown = document.getElementById('lang-dropdown');
+            if(dropdown) dropdown.classList.remove('show');
+        }
+
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.lang-btn') && !event.target.closest('button[onclick*="lang-dropdown"]')) {
+                var dropdowns = document.getElementsByClassName("lang-menu");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
         }
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             addEventListener('click', function (e) { e.preventDefault(); document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' }); });
         });
         
-        function googleTranslateElementInit() {
+        // Attach init function to window so Google script can find it
+        window.googleTranslateElementInit = function() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
                 includedLanguages: 'en,es,de,fr,it,ja,zh-CN',
