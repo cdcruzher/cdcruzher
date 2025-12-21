@@ -51,6 +51,7 @@
     "footerText": "© 2025 All Rights Reserved.",
     "siteTitle": "My Portfolio",
     "logoImage": "",
+    "logoVideo": "logo.mp4",
     "primaryColor": "#8b5cf6",
     "accentColor": "#06b6d4"
   },
@@ -74,12 +75,6 @@
   },
   "projects": [
     {
-      "title": "Time capsule",
-      "desc": "Exploring dates",
-      "link": "https://cdcruzher.github.io/efemerides-music/",
-      "icon": "fas fa-code"
-    },
-    {
       "title": "Music Time Capsule",
       "desc": "Explore daily musical history.",
       "link": "https://cdcruzher.github.io/efemerides-music/",
@@ -94,34 +89,13 @@
   ],
   "blog": [
     {
-      "title": "The end of RNA",
-      "content": "Treatment of lung cancer leptomeningeal carcinomatosis (LM) remains challenging partly due to the biological nature of the blood–brain barrier (BBB). Cisplatin has limited effects on LM, and it is notorious for neurotoxicity. Aptamers are small oligonucleotides considered as antibody surrogates. Here we report a DNA therapeutics, AptBCis1. AptBCis1 is a cisplatin-conjugated, BBB-penetrating, and cancer-targeting DNA aptamer. Its backbone, AptB1, was identified via in vivo SELEX using lung cancer LM orthotopic mouse models. The AptB1 binds to EAAT2, Nucleolin, and YB-1 proteins. Treatment with AptBCis1 1 mg/kg (equivalent to cisplatin 0.35 mg/kg) showed superior tumor suppressive effects compared to cisplatin 2 mg/kg in mice with lung cancer LM diseases. The cerebrospinal fluid platinum concentration in the AptBCis1 group was 10% of that in the cisplatin group. The data suggested the translational potential of AptBCis1 in lung cancer with LM and in cancers in which platinum-based chemotherapy remains as the standard of care.\n\n",
-      "date": "",
-      "category": "Update"
-    },
-    {
-      "title": "RNA",
-      "content": "",
-      "date": "2025-12-20",
-      "category": "Update"
-    },
-    {
       "title": "Hello World",
       "content": "Welcome to my new portfolio.",
       "date": "2025-01-01",
       "category": "Update"
     }
   ],
-  "gallery": [
-    {
-      "url": "veracruz.jpg",
-      "link": ""
-    },
-    {
-      "url": "RNA.jpg",
-      "link": ""
-    }
-  ]
+  "gallery": []
 };
         const Icon = ({ name, size = 20, className }) => <i data-lucide={name} width={size} height={size} className={className}></i>;
 
@@ -129,13 +103,26 @@
             useEffect(() => { if (window.lucide) window.lucide.createIcons(); });
             const t = DATA.nav;
             const logoSrc = DATA.config.logoImage || "https://ui-avatars.com/api/?name=CD&background=6366f1&color=fff&size=128";
+            const logoVideo = DATA.config.logoVideo;
             
             return (
                 <nav className="fixed w-full z-50 glass-card border-b-0 border-white/5 top-0">
                     <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
                         <div className="flex items-center gap-4 cursor-pointer" onClick={() => setView('home')}>
-                            <div className="h-10 w-10 rounded-xl overflow-hidden border border-slate-600">
-                                <img src={logoSrc} alt="Logo" className="h-full w-full object-cover" />
+                            <div className="h-10 w-10 rounded-xl overflow-hidden border border-slate-600 relative bg-black">
+                                {logoVideo ? (
+                                    <video 
+                                        src={logoVideo} 
+                                        className="h-full w-full object-cover" 
+                                        autoPlay 
+                                        loop={true}
+                                        muted 
+                                        playsInline 
+                                        onEnded={(e) => e.target.play()}
+                                    />
+                                ) : (
+                                    <img src={logoSrc} alt="Logo" className="h-full w-full object-cover" />
+                                )}
                             </div>
                             <span className="font-bold text-xl tracking-tight text-white">{DATA.config.logoText}</span>
                         </div>
@@ -240,7 +227,10 @@
                         {items.map((item, i) => (
                             <a key={i} href={item.link || '#'} target="_blank" className="block relative aspect-square glass-card rounded-2xl overflow-hidden group">
                                 <img src={item.url} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100" alt="Gallery" />
-                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white"><Icon name="instagram" size={32} /></div>
+                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white pb-6"><Icon name="instagram" size={32} /></div>
+                                <div className="absolute bottom-0 left-0 right-0 bg-black/80 text-slate-300 text-[10px] font-mono py-1.5 text-center truncate px-2 border-t border-white/10">
+                                    {item.url}
+                                </div>
                             </a>
                         ))}
                     </div>
