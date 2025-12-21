@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Carlos David</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -48,9 +48,9 @@
         const { useState, useEffect } = React;
         const DATA = {
   "config": {
-    "logoText": "MY.PORTFOLIO",
+    "logoText": "CARLOS DAVID",
     "footerText": "© 2025 All Rights Reserved.",
-    "siteTitle": "My Portfolio",
+    "siteTitle": "Carlos David",
     "logoImage": "",
     "logoVideo": "logo.mp4",
     "primaryColor": "#8b5cf6",
@@ -118,34 +118,59 @@
       "url": "amordecigarro.jpg",
       "link": ""
     }
+  ],
+  "social": [
+    {
+      "platform": "X",
+      "link": "https://x.com/cdcruzher",
+      "icon": "fab fa-twitter"
+    },
+    {
+      "platform": "Facebook",
+      "link": "https://www.facebook.com/cdcruzher",
+      "icon": "fab fa-facebook"
+    },
+    {
+      "platform": "Instagram",
+      "link": "https://www.instagram.com/cdcruzher/",
+      "icon": "fab fa-instagram"
+    },
+    {
+      "platform": "Linkedin",
+      "link": "https://www.linkedin.com/in/cdcruzher/",
+      "icon": "fab fa-linkedin"
+    },
+    {
+      "platform": "YouTube",
+      "link": "https://www.youtube.com/@cdcruzher",
+      "icon": "fab fa-youtube"
+    },
+    {
+      "platform": "Tiktok",
+      "link": "https://www.tiktok.com/@cdcruzher",
+      "icon": "fab fa-tiktok"
+    },
+    {
+      "platform": "Spotify",
+      "link": "https://open.spotify.com/artist/6VPgYyhrNfQhCUgKJQMUqh",
+      "icon": "fab fa-spotify"
+    }
   ]
 };
+        const IS_PREVIEW = false;
         const Icon = ({ name, size = 20, className }) => <i data-lucide={name} width={size} height={size} className={className}></i>;
 
         const NavBar = ({ setView, view }) => {
             useEffect(() => { if (window.lucide) window.lucide.createIcons(); });
             const t = DATA.nav;
             const logoSrc = DATA.config.logoImage || "https://ui-avatars.com/api/?name=CD&background=6366f1&color=fff&size=128";
-            const logoVideo = DATA.config.logoVideo;
             
             return (
                 <nav className="fixed w-full z-50 glass-card border-b-0 border-white/5 top-0">
                     <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
                         <div className="flex items-center gap-4 cursor-pointer" onClick={() => setView('home')}>
-                            <div className="h-14 w-14 rounded-xl overflow-hidden border border-slate-600 relative bg-black">
-                                {logoVideo ? (
-                                    <video 
-                                        src={logoVideo} 
-                                        className="h-full w-full object-cover" 
-                                        autoPlay 
-                                        loop={true}
-                                        muted 
-                                        playsInline 
-                                        onEnded={(e) => e.target.play()}
-                                    />
-                                ) : (
-                                    <img src={logoSrc} alt="Logo" className="h-full w-full object-cover" />
-                                )}
+                            <div className="h-10 w-10 rounded-xl overflow-hidden border border-slate-600">
+                                <img src={logoSrc} alt="Logo" className="h-full w-full object-cover" />
                             </div>
                             <span className="font-bold text-xl tracking-tight text-white">{DATA.config.logoText}</span>
                         </div>
@@ -258,14 +283,26 @@
                             <a key={i} href={item.link || '#'} target="_blank" className="block relative aspect-square glass-card rounded-2xl overflow-hidden group">
                                 <img src={item.url} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100" alt="Gallery" />
                                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white pb-6"><Icon name="instagram" size={32} /></div>
-                                <div className="absolute bottom-0 left-0 right-0 bg-black/80 text-slate-300 text-[10px] font-mono py-1.5 text-center truncate px-2 border-t border-white/10">
-                                    {item.url}
-                                </div>
+                                {IS_PREVIEW && (
+                                    <div className="absolute bottom-0 left-0 right-0 bg-black/80 text-slate-300 text-[10px] font-mono py-1.5 text-center truncate px-2 border-t border-white/10">
+                                        {item.url}
+                                    </div>
+                                )}
                             </a>
                         ))}
                     </div>
                 </div>
             </section>
+        );
+
+        const Socials = ({ items }) => (
+            <div className="flex justify-center gap-6 mt-8 mb-6">
+                {items && items.map((item, i) => (
+                    <a key={i} href={item.link} target="_blank" className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all transform hover:scale-110 hover:-translate-y-1">
+                        <i className={`${item.icon} text-xl`} />
+                    </a>
+                ))}
+            </div>
         );
 
         const App = () => {
@@ -306,6 +343,7 @@
                     <Blog posts={DATA.blog} />
 
                     <footer className="text-center py-12 text-slate-500 text-sm border-t border-slate-800 mt-10">
+                        <Socials items={DATA.social} />
                         <p>{DATA.config.footerText}</p>
                     </footer>
                 </div>
