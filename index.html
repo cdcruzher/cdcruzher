@@ -10,6 +10,7 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Inter', sans-serif; }
         section { scroll-margin-top: 100px; }
@@ -63,17 +64,23 @@
     "gallery": "Gallery"
   },
   "home": {
-    "badge": "Creative Developer",
-    "headline": "Building Digital Experiences",
-    "desc": "Exploring code, music, and science."
+    "badge": "Scientist and Artist",
+    "headline": "Carlos David",
+    "desc": "Exploring the Code of Science and Music"
   },
   "about": {
     "title": "About Me",
-    "bio": "I am a creative developer passionate about building tools that merge art and technology.",
-    "thought": "Code is the closest thing we have to magic.",
+    "bio": "As a passionate musician, my story intertwines with notes of passion and melodies of determination. Following the release of three albums so far, “Amor de Cigarro”, “El Retorno de las Mariposas” and “Música en mis oídos” each creation represents a unique chapter in my musical journey. Every composition, every lyric, is a window to my inner world, where emotions find their voice through chords and harmonies.\n\nCurrently, I am immersed in the exciting world of music, exploring and refining my skills at GMartell University. Here, each day is an opportunity to absorb knowledge, explore new sounds, and grow as an artist. Every note I learn, every melody I discover, is another step in my ascent towards musical mastery.\n\nMy story as a musician is nurtured by experiences, learning, and an unwavering love for the art of sound. Through each composition and every chord, I strive to transcend the barriers of sound and meaning, to share my passion with the world.",
+    "thought": "My Life is Science and Music",
     "profileImage": "myphoto.jpg"
   },
   "projects": [
+    {
+      "title": "All my Apps",
+      "desc": "Welcome to my current projects",
+      "link": "https://cdcruzher.github.io/",
+      "icon": "fas fa-laptop-code"
+    },
     {
       "title": "Music Time Capsule",
       "desc": "Explore daily musical history.",
@@ -90,7 +97,7 @@
   "blog": [
     {
       "title": "RNA",
-      "content": "RNA is Life",
+      "content": "RNA is essential to life because it serves as the bridge between genetic information and cellular function. Messenger RNA (mRNA) carries instructions from DNA to ribosomes, where proteins are built, while ribosomal RNA (rRNA) forms the structural and catalytic core of ribosomes, and transfer RNA (tRNA) delivers the correct amino acids during protein synthesis. Beyond these roles, small RNAs regulate gene expression, ribozymes perform enzymatic reactions, and the molecule itself is thought to have been central to the origin of life in the “RNA world” hypothesis. Altogether, RNA is not just a messenger but a versatile molecule that drives protein production, controls genetic activity, and underpins the evolutionary foundations of biology.",
       "date": "2025-01-01",
       "category": "Update",
       "images": [
@@ -98,7 +105,20 @@
       ]
     }
   ],
-  "gallery": []
+  "gallery": [
+    {
+      "url": "musicaenmisoidos.jpg",
+      "link": ""
+    },
+    {
+      "url": "elretornodelasmariposas.jpg",
+      "link": ""
+    },
+    {
+      "url": "amordecigarro.jpg",
+      "link": ""
+    }
+  ]
 };
         const Icon = ({ name, size = 20, className }) => <i data-lucide={name} width={size} height={size} className={className}></i>;
 
