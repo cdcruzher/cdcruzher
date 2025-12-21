@@ -69,7 +69,7 @@
   },
   "about": {
     "title": "About Me",
-    "bio": "I am a Mexican scientist currently based in Los Angeles. I am conducting research focused on understanding the molecular basis involved in the development and progression of different types of cancer. I am developing innovative therapies based on nucleic acids, called aptamers, to treat cancer.\nMy story as a musician is nurtured by experiences, learning, and an unwavering love for the art of sound. Through each composition and every chord, I strive to transcend the barriers of sound and meaning, to share my passion with the world.\n\nMy First Steps…\nI delved into the world of radio at the Universidad Autónoma Metropolitana, a space that I consider my home in time.",
+    "bio": "I am a creative developer passionate about building tools that merge art and technology.",
     "thought": "Code is the closest thing we have to magic.",
     "profileImage": "myphoto.jpg"
   },
@@ -89,10 +89,13 @@
   ],
   "blog": [
     {
-      "title": "Hello World",
-      "content": "Welcome to my new portfolio.",
+      "title": "RNA",
+      "content": "RNA is Life",
       "date": "2025-01-01",
-      "category": "Update"
+      "category": "Update",
+      "images": [
+        "rna.jpg"
+      ]
     }
   ],
   "gallery": []
@@ -211,6 +214,13 @@
                                     <span className="text-purple-400 bg-purple-500/10 px-2 py-1 rounded">{post.category}</span><span>•</span><span>{new Date(post.date).toLocaleDateString()}</span>
                                 </div>
                                 <h3 className="text-2xl font-bold mb-4 text-slate-100">{post.title}</h3>
+                                {post.images && post.images.length > 0 && (
+                                    <div className={`grid gap-4 mb-6 ${post.images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                                        {post.images.map((img, idx) => (
+                                            <img key={idx} src={img} alt="Blog attachment" className="rounded-xl w-full h-48 object-cover border border-slate-700/50" />
+                                        ))}
+                                    </div>
+                                )}
                                 <div className="text-slate-400 leading-relaxed whitespace-pre-line">{post.content}</div>
                             </article>
                         ))}
