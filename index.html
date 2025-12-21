@@ -287,26 +287,49 @@
             </section>
         );
 
-        const Gallery = ({ items }) => (
-            <section id="gallery" className="py-20 px-6">
-                <div className="max-w-6xl mx-auto">
-                    <h2 className="text-3xl font-bold mb-12 text-white">Visual Gallery</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {items.map((item, i) => (
-                            <a key={i} href={item.link || '#'} target="_blank" className="block relative aspect-square glass-card rounded-2xl overflow-hidden group">
-                                <img src={item.url} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100" alt="Gallery" />
-                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white pb-6"><Icon name="instagram" size={32} /></div>
-                                {IS_PREVIEW && (
-                                    <div className="absolute bottom-0 left-0 right-0 bg-black/80 text-slate-300 text-[10px] font-mono py-1.5 text-center truncate px-2 border-t border-white/10">
-                                        {item.url}
+        const Gallery = ({ items }) => {
+            const [selectedImg, setSelectedImg] = useState(null);
+
+            return (
+                <section id="gallery" className="py-20 px-6">
+                    <div className="max-w-6xl mx-auto">
+                        <h2 className="text-3xl font-bold mb-12 text-white">Visual Gallery</h2>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            {items.map((item, i) => (
+                                <div key={i} onClick={() => setSelectedImg(item.url)} className="relative aspect-square glass-card rounded-2xl overflow-hidden group cursor-pointer">
+                                    <img src={item.url} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100" alt="Gallery" />
+                                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                        <Icon name="zoom-in" className="text-white" size={32} />
                                     </div>
-                                )}
-                            </a>
-                        ))}
+                                    {IS_PREVIEW && (
+                                        <div className="absolute bottom-0 left-0 right-0 bg-black/80 text-slate-300 text-[10px] font-mono py-1.5 text-center truncate px-2 border-t border-white/10">
+                                            {item.url}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </div>
-            </section>
-        );
+
+                    {selectedImg && (
+                        <div 
+                            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in"
+                            onClick={() => setSelectedImg(null)}
+                        >
+                            <button className="absolute top-4 right-4 text-white/70 hover:text-white p-2">
+                                <Icon name="x" size={40} />
+                            </button>
+                            <img 
+                                src={selectedImg} 
+                                className="max-w-full max-h-[90vh] rounded-lg shadow-2xl" 
+                                alt="Full size"
+                                onClick={(e) => e.stopPropagation()} 
+                            />
+                        </div>
+                    )}
+                </section>
+            );
+        };
 
         const Socials = ({ items }) => (
             <div className="flex justify-center gap-6 mt-8 mb-6">
