@@ -155,6 +155,15 @@
       "link": "https://open.spotify.com/artist/6VPgYyhrNfQhCUgKJQMUqh",
       "icon": "fab fa-spotify"
     }
+  ],
+  "store": [
+    {
+      "title": "Amor de Cigarro",
+      "price": "10",
+      "image": "amordecigarro.jpg",
+      "link": "https://www.paypal.com/donate/?business=6EN68NHUTM2KQ&no_recurring=0&item_name=Thanks+for+your+support+Amigo%21&currency_code=USD",
+      "description": "My first trova album"
+    }
   ]
 };
         const IS_PREVIEW = false;
@@ -188,7 +197,7 @@
                             <span className="font-bold text-xl tracking-tight text-white">{DATA.config.logoText}</span>
                         </div>
                         <div className="hidden md:flex items-center gap-2">
-                            {['home', 'portfolio', 'about', 'blog', 'gallery'].map(item => (
+                            {['home', 'portfolio', 'about', 'blog', 'gallery', 'store'].map(item => (
                                 <button key={item} onClick={() => setView(item)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${view === item ? 'bg-slate-800 text-white border border-slate-600' : 'text-slate-400 hover:text-white hover:bg-white/5'}`}>
                                     {t[item] || item}
                                 </button>
@@ -341,6 +350,45 @@
             );
         };
 
+        const Store = ({ items, setView }) => (
+            <section id="store" className="min-h-screen pt-32 pb-20 px-6 animate-fade-in">
+                <div className="max-w-6xl mx-auto">
+                    <div className="flex justify-between items-center mb-12">
+                        <h2 className="text-4xl font-bold text-white">Store</h2>
+                        <button onClick={() => setView('home')} className="flex items-center gap-2 px-4 py-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors border border-slate-600 text-slate-300 hover:text-white">
+                            <Icon name="home" size={18} /> Back to Home
+                        </button>
+                    </div>
+                    {items && items.length > 0 ? (
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {items.map((item, i) => (
+                                <div key={i} className="glass-card rounded-3xl overflow-hidden flex flex-col group">
+                                    <div className="relative h-64 overflow-hidden bg-slate-900/50">
+                                        <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                        <div className="absolute top-4 right-4 px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-green-400 font-bold border border-green-500/20 shadow-lg">
+                                            {item.price}
+                                        </div>
+                                    </div>
+                                    <div className="p-6 flex flex-col flex-grow">
+                                        <h3 className="text-2xl font-bold text-white mb-2">{item.title}</h3>
+                                        <p className="text-slate-400 text-sm mb-6 flex-grow leading-relaxed">{item.description}</p>
+                                        <a href={item.link} target="_blank" className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold text-center transition-all shadow-lg hover:shadow-indigo-500/25 flex items-center justify-center gap-2 group-hover:translate-y-[-2px]">
+                                            Buy Now <Icon name="shopping-bag" size={18} />
+                                        </a>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="text-center py-20 text-slate-500">
+                            <Icon name="shopping-bag" size={48} className="mx-auto mb-4 opacity-50" />
+                            <p>No products available yet.</p>
+                        </div>
+                    )}
+                </div>
+            </section>
+        );
+
         const Socials = ({ items }) => (
             <div className="flex justify-center gap-6 mt-8 mb-6">
                 {items && items.map((item, i) => (
@@ -363,6 +411,8 @@
                         } else {
                             const el = document.getElementById(id);
                             if (el) el.scrollIntoView({ behavior: 'smooth' });
+                            // If user clicks Store tab in admin, switch view to store
+                            if (id === 'store') setView('store');
                         }
                     }
                 };
@@ -374,12 +424,21 @@
                 if (window.lucide) window.lucide.createIcons();
             });
 
+            // Exclusive Store View
+            if (view === 'store') {
+                return <Store items={DATA.store} setView={setView} />;
+            }
+
             return (
                 <div className="pb-20 pt-20">
                     <NavBar setView={(v) => {
                         setView(v);
-                        const el = document.getElementById(v);
-                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                        if (v !== 'store') {
+                            setTimeout(() => {
+                                const el = document.getElementById(v);
+                                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                            }, 100);
+                        }
                     }} view={view} />
                     
                     <Hero data={DATA.home} social={DATA.social} setView={(v) => document.getElementById(v).scrollIntoView({ behavior: 'smooth' })} />
