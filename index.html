@@ -28,7 +28,6 @@
         }
         .animate-fade-in { animation: fadeIn 0.5s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
         /* Embed Handling */
         .embed-content iframe, .embed-content video, .embed-content object {
             max-width: 100%;
@@ -181,6 +180,8 @@
         const Icon = ({ name, size = 20, className }) => <i data-lucide={name} width={size} height={size} className={className}></i>;
 
         const NavBar = ({ setView, view }) => {
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+
             useEffect(() => { if (window.lucide) window.lucide.createIcons(); });
             const t = DATA.nav;
             const logoSrc = DATA.config.logoImage || "https://ui-avatars.com/api/?name=CD&background=6366f1&color=fff&size=128";
@@ -214,8 +215,25 @@
                                 </button>
                             ))}
                         </div>
-                        <div className="md:hidden text-slate-300"><Icon name="menu" /></div>
+                        <div className="md:hidden text-slate-300 cursor-pointer p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                            <Icon name={isMenuOpen ? "x" : "menu"} />
+                        </div>
                     </div>
+
+                    {/* Mobile Menu Dropdown */}
+                    {isMenuOpen && (
+                        <div className="md:hidden absolute top-20 left-0 w-full glass-card border-t border-white/10 p-4 flex flex-col gap-2 animate-fade-in shadow-2xl">
+                             {['home', 'portfolio', 'about', 'blog', 'gallery', 'store'].map(item => (
+                                <button 
+                                    key={item} 
+                                    onClick={() => { setView(item); setIsMenuOpen(false); }} 
+                                    className={`text-left px-4 py-3 rounded-xl font-medium transition-all ${view === item ? 'bg-slate-800 text-white' : 'text-slate-300 hover:text-white hover:bg-white/5'}`}
+                                >
+                                    {t[item] || item}
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </nav>
             );
         };
