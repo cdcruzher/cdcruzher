@@ -200,9 +200,19 @@
             );
         };
 
-        const Hero = ({ data, setView }) => (
-            <section id="home" className="pt-32 pb-20 px-6 text-center animate-fade-in">
-                <div className="max-w-3xl mx-auto">
+        const Hero = ({ data, social, setView }) => (
+            <section id="home" className="pt-24 pb-4 px-6 text-center animate-fade-in">
+                <div className="max-w-3xl mx-auto flex flex-col items-center">
+                    
+                    {/* Social Icons */}
+                    <div className="flex gap-6 mb-8 animate-fade-in" style={{animationDelay: '0.1s'}}>
+                        {social && social.map((item, i) => (
+                            <a key={i} href={item.link} target="_blank" className="text-slate-400 hover:text-white transition-all transform hover:scale-110">
+                                <i className={`${item.icon} text-2xl`} />
+                            </a>
+                        ))}
+                    </div>
+
                     <div className="inline-block px-4 py-1.5 mb-6 text-xs font-mono text-purple-300 bg-purple-900/30 rounded-full border border-purple-500/30 backdrop-blur-sm">{data.badge}</div>
                     <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight">{data.headline}</h1>
                     <p className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">{data.desc}</p>
@@ -215,9 +225,9 @@
         );
 
         const Portfolio = ({ items }) => (
-            <section id="portfolio" className="py-20 px-6">
+            <section id="portfolio" className="py-4 px-6">
                 <div className="max-w-6xl mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-12 text-white flex items-center gap-3"><span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">Projects</span></h2>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white flex items-center gap-3"><span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">Projects</span></h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {items.map((project, i) => (
                             <a key={i} href={project.link} target="_blank" className="glass-card rounded-3xl p-6 group cursor-pointer flex flex-col h-full relative overflow-hidden">
@@ -372,7 +382,7 @@
                         if (el) el.scrollIntoView({ behavior: 'smooth' });
                     }} view={view} />
                     
-                    <Hero data={DATA.home} setView={(v) => document.getElementById(v).scrollIntoView({ behavior: 'smooth' })} />
+                    <Hero data={DATA.home} social={DATA.social} setView={(v) => document.getElementById(v).scrollIntoView({ behavior: 'smooth' })} />
                     <Portfolio items={DATA.projects} />
                     <About data={DATA.about} />
                     <Gallery items={DATA.gallery} />
